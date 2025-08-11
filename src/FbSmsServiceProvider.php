@@ -11,7 +11,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 class FbSmsServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'fb-sms';
-    public static string $viewNamespace = 'fb-sms';
 
     public function configurePackage(Package $package): void
     {
@@ -26,7 +25,6 @@ class FbSmsServiceProvider extends PackageServiceProvider
     {
         Notification::extend('sms', fn () => new FbSms());
 
-        // Testing
         Testable::mixin(new TestsFbSms);
     }
 }
