@@ -2,23 +2,25 @@
 
 namespace Mortezamasumi\FbSms;
 
-use Illuminate\Support\Facades\Notification;
+use Exception;
+use Illuminate\Notifications\Notification;
 use Mortezamasumi\FbSms\Exceptions\InvalidOperatorException;
 use Mortezamasumi\FbSms\Exceptions\UnknowTextMethodException;
-use Exception;
 
 class FbSms
 {
     public function send(object $notifiable, Notification $notification): void
     {
         try {
-            throw_unless(method_exists($notification, 'toSms'), new UnknowTextMethodException($notification));
+            throw_unless(
+                method_exists($notification, 'toSms'),
+                new UnknowTextMethodException($notification)
+            );
 
             $operator = app('SMSOperator');
 
             throw_unless($operator, new InvalidOperatorException);
 
-            /** @disregard */
             $operator->setText($notification->toSms($notifiable));
 
             $operator->setTo($notifiable?->mobile ?? $notifiable?->routes['sms']);
@@ -30,7 +32,6 @@ class FbSms
             $operator->afterSend();
 
             if (method_exists($notification, 'succeeded')) {
-                /** @disregard */
                 $notification->succeeded($operator);
             }
         } catch (Exception $exception) {

@@ -2,8 +2,8 @@
 
 namespace Mortezamasumi\FbSms\Exceptions;
 
-use Illuminate\Support\Facades\Notification;
 use Exception;
+use Illuminate\Notifications\Notification;
 
 class UnknowTextMethodException extends Exception
 {
