@@ -1,6 +1,6 @@
 <?php
 
-namespace Mortezamasumi\FbSms\Tests\database\factories;
+namespace Mortezamasumi\FbSms\Tests\Services;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -8,17 +8,15 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-    protected static ?string $password;
-
     public function definition(): array
     {
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-            'mobile' => '09'.fake()->numerify('#########'),
+            'force_change_password' => true,
         ];
     }
 }

@@ -1,14 +1,15 @@
 <?php
 
-namespace Mortezamasumi\FbSms\Tests\Models;
+namespace Mortezamasumi\FbSms\Tests\Services;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Notification;
-use Mortezamasumi\FbSms\Tests\database\factories\UserFactory;
-use Mortezamasumi\FbSms\Traits\MobileNotifiable;
+use Illuminate\Notifications\Notification;
 
 #[UseFactory(UserFactory::class)]
 class User extends Authenticatable
