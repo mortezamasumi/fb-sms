@@ -22,6 +22,7 @@ it('can send sms by route', function (): void {
     Notification::assertSentOnDemand(
         SmsNotify::class,
         function (SmsNotify $notification, array $channels, object $notifiable) use ($text, $smsNumber) {
+            expect($channels)->toContain('sms');
             expect($notifiable->routes['sms'])->toBe($smsNumber);
             expect($notification->toSms($notifiable))->toBe($text);
 
