@@ -6,8 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Cache;
-use Mortezamasumi\FbSms\Contracts\Operator;
-use Exception;
 
 class SmsNotify extends Notification implements ShouldQueue
 {
