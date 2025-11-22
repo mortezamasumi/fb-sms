@@ -12,6 +12,12 @@ abstract class Operator
     protected ?string $code;
     protected ?string $message;
 
+    public static function initialize($provider): void
+    {
+        // if operator needs any initialization
+        // this will call in fb-sms service provider booted
+    }
+
     /**
      * send sms to one or many numbers in $to
      * return bool for success or not

@@ -24,7 +24,7 @@ class FbSmsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        Notification::extend('sms', fn () => new FbSms());
+        Notification::extend('sms', fn() => new FbSms());
 
         $this->registerOperator();
 
@@ -34,11 +34,14 @@ class FbSmsServiceProvider extends PackageServiceProvider
     protected function registerOperator(): void
     {
         $className = config('fb-sms.operator');
+
         $parentClass = '\Mortezamasumi\FbSms\Contracts\Operator';
 
         if (class_exists($className)) {
             if (is_subclass_of($className, $parentClass)) {
-                app()->singleton('SMSOperator', fn () => new ($className)());
+                $className::initialize($this);
+
+                app()->singleton('SMSOperator', fn() => new ($className)());
             } else {
                 throw new InvalidOperatorException("Class {$className} does not extend from {$parentClass}.");
             }
